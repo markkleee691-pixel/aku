@@ -1,0 +1,532 @@
+Berikut **Landing Page Romantis + Game Interaktif** yang super lucu untuk pacar kamu! 🎀💕
+
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 Sayangku yang Paling Cantik 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(-45deg, #ff9a9e, #fecfef, #fecfef, #ff9a9e);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Hearts */
+        .heart {
+            position: fixed;
+            font-size: 20px;
+            color: #ff69b4;
+            pointer-events: none;
+            z-index: 1000;
+            animation: float 6s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            background: linear-gradient(45deg, #ff6b9d, #c44569, #ff9ff3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        .play-btn {
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+            animation: bounce 2s infinite;
+        }
+
+        .play-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.6);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Game Section */
+        .game-section {
+            display: none;
+            min-height: 100vh;
+            padding: 100px 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .game-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .game-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .score {
+            font-size: 1.5rem;
+            color: #ff6b9d;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .game-canvas {
+            border: 5px solid #ff6b9d;
+            border-radius: 20px;
+            background: linear-gradient(45deg, #fff, #ffeef2);
+            cursor: crosshair;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .hearts-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 2rem 0;
+        }
+
+        .heart-life {
+            font-size: 2rem;
+            color: #ff69b4;
+        }
+
+        .heart-life.lost {
+            color: #999;
+        }
+
+        .game-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.6);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Victory Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            padding: 4rem;
+            border-radius: 30px;
+            text-align: hadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 500px;
+            animation: modalPop 0.5s ease;
+        }
+
+        @keyframes modalPop {
+            from {
+                transform: translate(-50%, -50%) scale(0.7);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #c44569;
+        }
+
+        /* Love Messages */
+        .love-message {
+            font-size: 1.3rem;
+            color: #333;
+            margin: 2rem 0;
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 3.5rem;
+            }
+            
+            .game-container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .game-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts -->
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">💕 Sayangku 💕</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Hi Sayangku! 😍</h1>
+            <p>Aku buat ini khusus buat kamu yang paling cantik di hatiku 💖<br>
+            Yuk main game bareng, ada hadiah spesial!</p>
+            <button class="play-btn" onclick="startGame()">
+                <i class="fas fa-gamepad"></i> Main Game Sekarang!
+            </button>
+        </div>
+    </section>
+
+    <!-- Game Section -->
+    <section class="game-section" id="gameSection">
+        <div class="game-container">
+            <h2 class="game-title">💘 Love Hearts Catcher 💘</h2>
+            <div class="score">Score: <span id="score">0</span> | Best: <span id="bestScore">0</span></div>
+            
+            <div class="hearts-container">
+                <div class="heart-life" id="life1">💖</div>
+                <div class="heart-life" id="life2">💖</div>
+                <div class="heart-life" id="life3">💖</div>
+            </div>
+            
+            <canvas id="gameCanvas" class="game-canvas" width="600" height="400"></canvas>
+            
+            <div class="game-controls">
+                <button class="btn" onclick="startGame()">🔄 Main Lagi</button>
+                <button class="btn" onclick="pauseGame()">⏸️ Pause</button>
+            </div>
+            
+            <p style="margin-top: 2rem; color: #666; font-size: 1.1rem;">
+                📱 Klik hati-hati yang jatuh! Jangan sampai kelewatan ya sayang 💕
+            </p>
+        </div>
+    </section>
+
+    <!-- Victory Modal -->
+    <div id="victoryModal" class="modal">
+        <div class="modal-content">
+            <h2>🎉 YEAYYY KAMU JAGO BANGET! 🎉</h2>
+            <div class="love-message" id="victoryMessage"></div>
+            <button class="btn" style="font-size: 1.2rem; padding: 1.2rem 2.5rem;" onclick="closeModal()">
+                <i class="fas fa-heart"></i> Cium dulu dong! 😘
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Game Variables
+        let gameRunning = false;
+        let score = 0;
+        let bestScore = localStorage.getItem('bestLoveScore') || 0;
+        let lives = 3;
+        let hearts = [];
+        let gameLoop;
+        let canvas, ctx, basket;
+
+        // Love Messages
+        const loveMessages = [
+            "Kamu juara hatiku selamanya! 💕",
+            "Sayangku paling pinter main game! 😍",
+            "Aku cinta kamu lebih dari score ini! ❤️",
+            "Kamu bikin hatiku berbunga-bunga! 🌸",
+            "Tiap hati ini buat kamu sayang! 💖",
+            "Kamu nomor 1 di hidupku! 🥰",
+            "Makin lama makin cinta! 😘"
+        ];
+
+        // Initialize Game
+        function initGame() {
+            canvas = document.getElementById('gameCanvas');
+            ctx = canvas.getContext('2d');
+            canvas.addEventListener('click', handleClick);
+            
+            document.getElementById('bestScore').textContent = bestScore;
+            resetGame();
+        }
+
+        function resetGame() {
+            score = 0;
+            lives = 3;
+            hearts = [];
+            updateUI();
+            basket = { x: canvas.width / 2 - 25, y: canvas.height - 60, width: 50, height: 50 };
+        }
+
+        function updateUI() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('life1').className = lives >= 1 ? 'heart-life' : 'heart-life lost';
+            document.getElementById('life2').className = lives >= 2 ? 'heart-life' : 'heart-life lost';
+            document.getElementById('life3').className = lives >= 3 ? 'heart-life' : 'heart-life lost';
+        }
+
+        // Create Floating Background Hearts
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = ['💖', '💕', '💗', '💝', '🌸'][Math.floor(Math.random() * 5)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            document.getElementById('heartsContainer').appendChild(heart);
+
+            setTimeout(() => {
+                if (heart.parentNode) {
+                    heart.parentNode.removeChild(heart);
+                }
+            }, 7000);
+        }
+
+        setInterval(createFloatingHeart, 300);
+
+        // Game Functions
+        function startGame() {
+            document.querySelector('.hero').style.display = 'none';
+            document.getElementById('gameSection').style.display = 'block';
+            
+            if (!gameRunning) {
+                gameRunning = true;
+                resetGame();
+                gameLoop = setInterval(gameLoopFunc, 30);
+            }
+        }
+
+        function pauseGame() {
+            gameRunning = !gameRunning;
+        }
+
+        function gameLoopFunc() {
+            if (!gameRunning) return;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Update hearts
+            hearts.forEach((heart, index) => {
+                heart.y += heart.speed;
+                
+                if (heart.y > canvas.height) {
+                    hearts.splice(index, 1);
+                    if (lives > 0) lives--;
+                    updateUI();
+                    checkGameOver();
+                } else {
+                    // Draw heart
+                    ctx.save();
+                    ctx.translate(heart.x + 15, heart.y + 15);
+                    ctx.rotate(heart.rotation);
+                    ctx.font = '20px Arial';
+                    ctx.fillText(heart.emoji, -10, 10);
+                    ctx.restore();
+                    
+                    heart.rotation += 0.1;
+                }
+            });
+
+            // Draw basket
+            ctx.fillStyle = '#ff6b9d';
+            ctx.fillRect(basket.x, basket.y, basket.width, basket.height);
+            ctx.fillStyle = 'white';
+            ctx.font = '20px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('💕', basket.x + 25, basket.y + 35);
+
+            // Add new hearts
+            if (Math.random() < 0.1) {
+                hearts.push({
+                    x: Math.random() * (canvas.width - 30),
+                    y: -30,
+                    speed: 2 + Math.random() * 3,
+                    rotation: 0,
+                    emoji: ['💖', '💕', '💗', '💝'][Math.floor(Math.random() * 4)]
+                });
+            }
+
+            checkVictory();
+        }
+
+        function handleClick(e) {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            hearts.forEach((heart, index) => {
+                if (x >= heart.x && x <= heart.x + 30 && 
+                    y >= heart.y && y <= heart.y + 30) {
+                    hearts.splice(index, 1);
+                    score += 10;
+                    updateUI();
+                    createCatchEffect(x, y);
+                }
+            });
+        }
+
+        function createCatchEffect(x, y) {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    ctx.fillStyle = `rgba(255, 107, 157, ${0.5 - i * 0.1})`;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 20 - i * 3, 0, Math.PI * 2);
+                    ctx.fill();
+                }, i * 100);
+            }
+        }
+
+        function checkGameOver() {
+            if (lives <= 0) {
+                gameRunning = false;
+                clearInterval(gameLoop
